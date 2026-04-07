@@ -20,9 +20,10 @@ def main() -> None:
     if transport == "stdio":
         mcp.run(transport="stdio")
     else:
-        mcp.settings.host = os.getenv("HOST", "0.0.0.0")
-        mcp.settings.port = int(os.getenv("PORT", "8000"))
-        mcp.run(transport="streamable-http")
+        import uvicorn
+        host = os.getenv("HOST", "0.0.0.0")
+        port = int(os.getenv("PORT", "8000"))
+        uvicorn.run(mcp.streamable_http_app(), host=host, port=port)
 
 
 if __name__ == "__main__":

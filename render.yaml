@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: financial-analyzer-mcp
+    runtime: python
+    buildCommand: pip install uv && uv sync --frozen
+    startCommand: uv run financial-analyzer
+    envVars:
+      - key: TRANSPORT
+        value: streamable-http
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: EDGAR_IDENTITY
+        value: Financial Analyzer mcp-financial-analyzer@example.com
+      - key: MCP_AUTH_TOKEN
+        generateValue: true
